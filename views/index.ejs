@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portal de notícias completo - Código Diário"
+    />
+    <title>Portal Código Diário - Home</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav id="menu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="noticia.html">Notícia</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+
+    <header id="header">
+      <div class="logo-text">
+        <h1>Portal Código Diário</h1>
+      </div>
+      <div class="logo-img">
+        <img src="img/Logo.png" alt="Logo Portal News" width="100" />
+      </div>
+    </header>
+
+    <form action="/" method="GET" class="barra-pesquisa">
+      <input type="text" name="q" placeholder="Buscar notícias..." required />
+      <button type="submit">Pesquisar</button>
+    </form>
+
+
+    <div class="container">
+      <section id="destaques">
+        <!-- INÍCIO DO LOOP: Para cada notícia na lista... -->
+        <% noticias.forEach(function(item) { %>
+        <article class="card-noticia">
+          <!-- Lógica da Imagem: Se não tiver foto na API, usa uma padrão -->
+          <img
+            src="<%= item.urlToImage || '/img/padrao.jpg' %>"
+            alt="Imagem da notícia"
+            onerror="this.src='/img/padrao.jpg'"
+          />
+          <div class="conteudo">
+            <h3><%= item.title %></h3>
+            <!-- Descrição (limita caso venha vazio) -->
+            <p><%= item.description || 'Sem descrição disponível.' %></p>
+            <!-- Link para a notícia original -->
+            <a href="<%= item.url %>" target="_blank" class="botao"
+              >Ler Completa</a
+            >
+          </div>
+        </article>
+        <% }); %>
+        <!-- FIM DO LOOP -->
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Portal Código Diário - Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>
